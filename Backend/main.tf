@@ -14,9 +14,12 @@ resource "azurerm_storage_account" "sa" {
   account_replication_type      = "LRS"
 }
 
-# Creation of the storage container for the static website
-resource "azurerm_storage_container" "sc" {
-  name                  = "$web"
-  storage_account_name  = azurerm_storage_account.sa.name
-  container_access_type = "blob"
+# Creation of the storage blob for the static website
+resource "azurerm_storage_blob" "example" {
+  name                   = "index.html"
+  storage_account_name   = azurerm_storage_account.storage_account.name
+  storage_container_name = "$web"
+  type                   = "Block"
+  content_type           = "text/html"
+  source                 = "index.html"
 }
