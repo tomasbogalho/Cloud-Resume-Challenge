@@ -30,3 +30,17 @@ variable "storage_account_name" {
   description = "Name of the storage account."
 }
 
+variable "app_service_plan_name" {
+  type        = string
+  default     = "appserviceplan"
+  description = "Name of the app service plan."
+  
+}
+
+variable "functionapp_name" {
+  type        = string
+  default     = "functionapp"
+  description = "Name of the function app."
+  
+}
+
