@@ -39,7 +39,7 @@ variable "app_service_plan_name" {
 
 variable "functionapp_name" {
   type        = string
-  default     = "functionapp"
+  default     = "functionapp982301"
   description = "Name of the function app."
 
 }
