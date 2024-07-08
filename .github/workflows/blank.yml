@@ -1,25 +1,26 @@
-name: Blob storage website CI
+name: Deploy Static Site to Azure Storage
 
 on:
-    push:
-        branches: [ main ]
+  push:
+    branches:
+      - main  # Adjust this to your default branch
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: azure/login@v1
+    - uses: actions/checkout@v2
+
+    - name: Login to Azure
+      uses: azure/login@v1
       with:
-          creds: ${{ secrets.AZURE_AD_CLIENT_ID }}, ${{ secrets.AZURE_AD_CLIENT_SECRET }}, ${{ secrets.AZURE_SUBSCRIPTION_ID }}, ${{ secrets.AZURE_AD_TENANT_ID }}
-    - name: Upload to blob storage
-      uses: azure/CLI@v1
+        creds: '{"clientId":"${{ secrets.AZURE_AD_CLIENT_ID }}","clientSecret":"${{ secrets.AZURE_AD_CLIENT_SECRET }}","subscriptionId":"YOUR_SUBSCRIPTION_ID","tenantId":"${{ secrets.AZURE_AD_TENANT_ID }}"}'
+
+    - name: Deploy to Azure Storage Account
+      uses: azure/cli@v1
       with:
         inlineScript: |
-            az storage blob upload-batch --account-name "sastaticwebsite84851" --auth-mode key -d '$web' -s .
+          az storage blob upload-batch -s dist -d \$web --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --auth-mode login
 
-    # Azure logout
-    - name: logout
-      run: |
-            az logout
-      if: always()
+    - name: Azure Logout
+      run: az logout
