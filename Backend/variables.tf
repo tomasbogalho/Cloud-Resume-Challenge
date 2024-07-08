@@ -8,8 +8,8 @@ variable "arm_client_id" {
 
 }
 
-variable "arm_client_secret" {
-  description = "The client secret of the service principal"
+variable "arm_tenant_id" {
+  description = "The tenant ID of the service principal"
 
 }
 
