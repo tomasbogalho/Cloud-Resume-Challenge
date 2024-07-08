@@ -12,7 +12,7 @@ resource "azurerm_storage_account" "sa" {
   account_tier             = "Standard"
   account_replication_type = "LRS"
   static_website {
-    index_document = "../Frontend/index.html"
+    index_document = "index.html"
   }
 }
 
@@ -24,4 +24,5 @@ resource "azurerm_storage_blob" "example" {
   type                   = "Block"
   content_type           = "text/html"
   source                 = "../Frontend/index.html"
+  depends_on = [azurerm_storage_account.sa]
 }
