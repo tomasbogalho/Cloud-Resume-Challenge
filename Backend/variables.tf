@@ -1,16 +1,16 @@
 variable "arm_subscription_id" {
   description = "The subscription ID to deploy the resources"
-  
+
 }
 
 variable "arm_client_id" {
   description = "The client ID of the service principal"
-  
+
 }
 
 variable "arm_client_secret" {
   description = "The client secret of the service principal"
-  
+
 }
 
 variable "resource_group_location" {
