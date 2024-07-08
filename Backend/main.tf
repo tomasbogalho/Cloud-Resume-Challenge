@@ -20,5 +20,5 @@ resource "azurerm_storage_blob" "example" {
   storage_container_name = "$web"
   type                   = "Block"
   content_type           = "text/html"
-  source                 = "index.html"
+  source                 = "../Frontend/index.html"
 }
