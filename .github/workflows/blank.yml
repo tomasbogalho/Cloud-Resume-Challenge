@@ -11,6 +11,19 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'  # Specify the Node.js version
+
+    - name: Install dependencies
+      run: npm install
+      working-directory: frontend  # Adjust if your package.json is in the frontend directory
+
+    - name: Build frontend
+      run: npm run build
+      working-directory: frontend  # Adjust if your build script is in the frontend directory
+
     - name: Login to Azure
       uses: azure/login@v1
       with:
@@ -20,7 +33,7 @@ jobs:
       uses: azure/cli@v1
       with:
         inlineScript: |
-          az storage blob upload-batch -s Frontend -d \$web --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --auth-mode login
+          az storage blob upload-batch -s frontend/build -d \$web --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --auth-mode login
 
     - name: Azure Logout
       run: az logout
