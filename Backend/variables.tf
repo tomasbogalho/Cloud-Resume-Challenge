@@ -26,7 +26,7 @@ variable "rg_name" {
 
 variable "storage_account_name" {
   type        = string
-  default     = "sastaticwebsitestorageaccount"
+  default     = "sastaticwebsite84851"
   description = "Name of the storage account."
 }
 
