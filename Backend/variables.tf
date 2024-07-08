@@ -34,13 +34,13 @@ variable "app_service_plan_name" {
   type        = string
   default     = "appserviceplan"
   description = "Name of the app service plan."
-  
+
 }
 
 variable "functionapp_name" {
   type        = string
   default     = "functionapp"
   description = "Name of the function app."
-  
+
 }
 
