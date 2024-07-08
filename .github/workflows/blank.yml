@@ -20,7 +20,7 @@ jobs:
       uses: azure/cli@v1
       with:
         inlineScript: |
-          az storage blob upload-batch -s dist -d \$web --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --auth-mode login
+          az storage blob upload-batch -s Frontend -d \$web --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --auth-mode login
 
     - name: Azure Logout
       run: az logout
