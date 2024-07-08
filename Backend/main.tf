@@ -24,5 +24,5 @@ resource "azurerm_storage_blob" "example" {
   type                   = "Block"
   content_type           = "text/html"
   source                 = "../Frontend/index.html"
-  depends_on = [azurerm_storage_account.sa]
+  depends_on             = [azurerm_storage_account.sa]
 }
