@@ -3,7 +3,7 @@ name: Deploy Static Site to Azure Storage
 on:
   push:
     branches:
-      - dev  # Adjust this to your default branch
+      - main  # Adjust this to your default branch
 
 jobs:
   deploy:
