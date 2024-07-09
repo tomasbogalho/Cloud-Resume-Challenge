@@ -54,7 +54,7 @@ resource "azurerm_function_app" "functionapp" {
 resource "azurerm_cosmosdb_account" "example" {
   name                = var.cosmos_account_name
   location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.example.name
+  resource_group_name = azurerm_resource_group.rg.name
   offer_type          = "Standard"
   kind                = "GlobalDocumentDB"
 
