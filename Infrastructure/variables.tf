@@ -53,8 +53,13 @@ variable "cosmos_account_name" {
 
 variable "cosmos_db_name" {
   type        = string
-  default     = "cosmosdb"
+  default     = "AzureResume"
   description = "Name of the cosmosdb account."
 
 }
 
+variable "cosmos_container_name" {
+  type        = string
+  default     = "Counter"
+  description = "Name of the container in the storage account"
+}

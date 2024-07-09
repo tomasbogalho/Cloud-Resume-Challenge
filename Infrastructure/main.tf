@@ -71,3 +71,27 @@ resource "azurerm_cosmosdb_account" "cosmosaccount" {
     azurerm_resource_group.rg
   ]
 }
+
+# Creating a Cosmos DB SQL API Database
+resource "azurerm_cosmosdb_sql_database" "cosmosdb" {
+  name                = var.cosmos_db_name
+  resource_group_name = azurerm_resource_group.rg.name
+  account_name        = azurerm_cosmosdb_account.cosmosaccount.name
+  throughput          = 400
+  depends_on = [
+    azurerm_cosmosdb_account.cosmosaccount
+  ]
+}
+
+# Creating a Cosmos DB SQL API Container
+resource "azurerm_cosmosdb_sql_container" "cosmoscontainer" {
+  name                = var.cosmos_container_name
+  resource_group_name = azurerm_resource_group.rg.name
+  account_name        = azurerm_cosmosdb_account.cosmosaccount.name
+  database_name       = azurerm_cosmosdb_sql_database.cosmosdb.name
+  partition_key_path  = "/id"
+  throughput          = 400
+  depends_on = [
+    azurerm_cosmosdb_sql_database.cosmosdb
+  ]
+}
