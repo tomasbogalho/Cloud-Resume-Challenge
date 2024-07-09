@@ -3,26 +3,13 @@ name: Deploy Static Site to Azure Storage
 on:
   push:
     branches:
-      - main  # Adjust this to your default branch
+      - dev  # Adjust this to your default branch
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '14'  # Specify the Node.js version
-
-    - name: Install dependencies
-      run: npm install
-      working-directory: ./Frontend  # Adjust if your package.json is in the frontend directory
-
-    - name: Build frontend
-      run: npm run build
-      working-directory: ./Frontend  # Adjust if your build script is in the frontend directory
+    - uses: actions/checkout@v3
 
     - name: Login to Azure
       uses: azure/login@v1
