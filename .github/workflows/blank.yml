@@ -1,0 +1,39 @@
+name: Deploy Static Site to Azure Storage
+
+on:
+  push:
+    branches:
+      - main  # Adjust this to your default branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'  # Specify the Node.js version
+
+    - name: Install dependencies
+      run: npm install
+      working-directory: ./Frontend  # Adjust if your package.json is in the frontend directory
+
+    - name: Build frontend
+      run: npm run build
+      working-directory: ./Frontend  # Adjust if your build script is in the frontend directory
+
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: '{"clientId":"${{ secrets.AZURE_AD_CLIENT_ID }}","clientSecret":"${{ secrets.AZURE_AD_CLIENT_SECRET }}","subscriptionId":"${{ secrets.AZURE_SUBSCRIPTION_ID }}","tenantId":"${{ secrets.AZURE_AD_TENANT_ID }}"}'
+
+    - name: Deploy to Azure Storage Account
+      uses: azure/cli@v1
+      with:
+        inlineScript: |
+          az storage blob upload-batch -s frontend/build -d \$web --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --auth-mode login
+
+    - name: Azure Logout
+      run: az logout
