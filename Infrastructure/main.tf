@@ -1,7 +1,7 @@
 # Creation of the RG for the static website
 resource "azurerm_resource_group" "rg" {
   name     = var.rg_name
-  location = var.resource_group_location
+  location = var.project_location
 }
 
 # Creation of the storage account for the static website
@@ -48,4 +48,26 @@ resource "azurerm_function_app" "functionapp" {
   storage_account_name       = azurerm_storage_account.sa.name
   storage_account_access_key = azurerm_storage_account.sa.primary_access_key
   version                    = "~4"
+}
+
+# Creating a Cosmos DB Account
+resource "azurerm_cosmosdb_account" "example" {
+  name                = var.cosmos_account_name
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.example.name
+  offer_type          = "Standard"
+  kind                = "GlobalDocumentDB"
+
+  geo_location {
+    location          = azurerm_resource_group.rg.location
+    failover_priority = 0
+  }
+  consistency_policy {
+    consistency_level       = "BoundedStaleness"
+    max_interval_in_seconds = 300
+    max_staleness_prefix    = 100000
+  }
+  depends_on = [
+    azurerm_resource_group.rg
+  ]
 }

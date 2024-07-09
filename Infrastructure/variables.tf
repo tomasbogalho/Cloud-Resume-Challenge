@@ -13,9 +13,9 @@ variable "arm_tenant_id" {
 
 }
 
-variable "resource_group_location" {
+variable "project_location" {
   default     = "North Europe"
-  description = "Location of the resource group."
+  description = "Location of project resources."
 }
 
 variable "rg_name" {
@@ -41,6 +41,20 @@ variable "functionapp_name" {
   type        = string
   default     = "functionapp982301"
   description = "Name of the function app."
+
+}
+
+variable "cosmos_account_name" {
+  type        = string
+  default     = "cosmosdb"
+  description = "Name of the cosmosdb account."
+
+}
+
+variable "cosmos_db_name" {
+  type        = string
+  default     = "cosmosdb"
+  description = "Name of the cosmosdb account."
 
 }
 
