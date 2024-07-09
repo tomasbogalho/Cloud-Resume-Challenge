@@ -46,7 +46,7 @@ variable "functionapp_name" {
 
 variable "cosmos_account_name" {
   type        = string
-  default     = "cosmosdb"
+  default     = "cosmosaccount1213"
   description = "Name of the cosmosdb account."
 
 }
