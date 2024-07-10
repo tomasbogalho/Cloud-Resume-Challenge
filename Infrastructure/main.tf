@@ -33,7 +33,7 @@ resource "azurerm_app_service_plan" "appserviceplan" {
   name                = var.app_service_plan_name
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  kind                = "FunctionApp"
+  kind                = "Linux"
   sku {
     tier = "Dynamic"
     size = "Y1"
@@ -82,7 +82,7 @@ resource "azurerm_cosmosdb_sql_database" "cosmosdb" {
     azurerm_cosmosdb_account.cosmosaccount
   ]
 }
-
+/*
 # Creating a Cosmos DB SQL API Container
 resource "azurerm_cosmosdb_sql_container" "cosmoscontainer" {
   name                = var.cosmos_container_name
@@ -95,3 +95,4 @@ resource "azurerm_cosmosdb_sql_container" "cosmoscontainer" {
     azurerm_cosmosdb_sql_database.cosmosdb
   ]
 }
+*/
