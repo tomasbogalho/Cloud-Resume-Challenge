@@ -51,6 +51,15 @@ resource "azurerm_function_app" "functionapp" {
   version                    = "~4"
 }
 
+data "azurerm_linux_function_app" "functionapp" {
+  name                = var.functionapp_name
+  resource_group_name = azurerm_resource_group.rg.name
+}
+
+output "id" {
+  value = data.azurerm_linux_function_app.example.id
+}
+
 # Creating a Cosmos DB Account
 resource "azurerm_cosmosdb_account" "cosmosaccount" {
   name                = var.cosmos_account_name
