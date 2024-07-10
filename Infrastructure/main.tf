@@ -41,32 +41,17 @@ resource "azurerm_app_service_plan" "appserviceplan" {
   }
 }
 # Creation of azure function app
-/*resource "azurerm_function_app" "functionapp" {
+resource "azurerm_function_app" "functionapp" {
   name                       = var.functionapp_name
   location                   = azurerm_resource_group.rg.location
   resource_group_name        = azurerm_resource_group.rg.name
   app_service_plan_id        = azurerm_app_service_plan.appserviceplan.id
   storage_account_name       = azurerm_storage_account.sa.name
   storage_account_access_key = azurerm_storage_account.sa.primary_access_key
+  os_type                    = "linux"
   version                    = "~4"
 }
-*/
 
-resource "azurerm_linux_function_app" "example" {
-  name                = var.functionapp_name
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_resource_group.rg.location
-
-  storage_account_name       = azurerm_storage_account.sa.name
-  storage_account_access_key = azurerm_storage_account.sa.primary_access_key
-  service_plan_id            = azurerm_app_service_plan.appserviceplan.id
-
-  site_config {}
-}
-
-output "id" {
-  value = data.azurerm_linux_function_app.example.id
-}
 
 # Creating a Cosmos DB Account
 resource "azurerm_cosmosdb_account" "cosmosaccount" {
