@@ -51,6 +51,11 @@ resource "azurerm_function_app" "functionapp" {
   os_type                    = "linux"
   version                    = "~4"
 
+  site_config {
+    linux_fx_version = "Python|3.9"  
+  }
+
+
   app_settings = {
     FUNCTIONS_WORKER_RUNTIME = "python"
     WEBSITE_RUN_FROM_PACKAGE = "1"
