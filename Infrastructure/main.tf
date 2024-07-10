@@ -50,6 +50,10 @@ resource "azurerm_function_app" "functionapp" {
   storage_account_access_key = azurerm_storage_account.sa.primary_access_key
   os_type                    = "linux"
   version                    = "~4"
+  app_settings = {
+    FUNCTIONS_WORKER_RUNTIME = "python"
+    WEBSITE_RUN_FROM_PACKAGE = "1"
+  }
 }
 
 
